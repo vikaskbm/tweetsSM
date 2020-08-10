@@ -17,3 +17,20 @@ final_text = []
 for word in text_tokenize:
     if word not in stopwords.words('english'):
         final_text.append(word)
+
+# NLP emotion algorithm.
+with open('emotion.json', encoding='UTF-8') as file:
+    emotions = json.load(file)
+
+emotion_list = []
+for word in final_text:
+    if word in emotions:
+        if isinstance(emotions[word], (list)):
+            emotion_list.extend(emotions[word])
+        else:
+            emotion_list.append(emotions[word])
+
+# count occurance of all the emotions in the input
+emotion_count = Counter(emotion_list)
+print(emotion_count)
+
