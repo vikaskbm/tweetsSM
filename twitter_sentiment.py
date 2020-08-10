@@ -1,6 +1,9 @@
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
+import json
+import matplotlib.pyplot as plt
+from collections import Counter
 
 text = 'I love my country!!'
 # lowercasing and cleaning the input text
