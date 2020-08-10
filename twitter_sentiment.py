@@ -8,5 +8,12 @@ text = text.lower()
 cleaned_text = text.translate(str.maketrans('', '', string.punctuation))
 
 # tokenizing the text using word_tokenize function
-text_tokenize = word_tokenize(cleaned_text)
+text_tokenize = word_tokenize(text)
 print(text_tokenize)
+
+
+# Removing stop words from our text
+final_text = []
+for word in text_tokenize:
+    if word not in stopwords.words('english'):
+        final_text.append(word)
