@@ -1,26 +1,23 @@
-
-# getting test input
-text = input("ENter data: ")
-
-
-# convert the input text as lowercase
-text_lower = text.lower()
-print(text_lower)
-
 import json
 import string
 from collections import Counter
 import matplotlib.pyplot as plt
 
 
+# getting test input
+text = input("ENter data: ")
+
+# convert the input text as lowercase
+text_lower = text.lower()
+# print(text_lower)
+
 # remove punctuations from input string
 cleaned_text = text_lower.translate(str.maketrans('', '', string.punctuation))
-print(cleaned_text)
+# print(cleaned_text)
 
 # tokenizing the words
 tokenized_text = cleaned_text.split()
-print(tokenized_text)
-
+# print(tokenized_text)
 
 # defining the stop words, ie the words that add any meaning to the sentence
 stop_words = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
@@ -42,8 +39,7 @@ for i in tokenized_text:
     if i not in stop_words:
         final_text.append(i)
 
-print(final_text)
-
+# print(final_text)
 
 # NLP emotion algorithm.
 with open('emotion.json', encoding='UTF-8') as file:
@@ -57,11 +53,12 @@ for word in final_text:
         else:
             emotion_list.append(emotions[word])
 
-print(emotion_list)
+# print(emotion_list)
 
 # counting occurance of all the emotions in the input
 emotion_count = Counter(emotion_list)
-print(emotion_count)
+# print(emotion_count)
+
 
 # plotting data on a graph
 fig, ax1 = plt.subplots()
