@@ -34,3 +34,9 @@ for word in final_text:
 emotion_count = Counter(emotion_list)
 print(emotion_count)
 
+
+# plotting data on a graph
+fig, ax1 = plt.subplots()
+ax1.bar(emotion_count.keys(), emotion_count.values())
+fig.autofmt_xdate()
+plt.show()
