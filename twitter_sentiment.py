@@ -8,12 +8,12 @@ import GetOldTweets3 as got
 
 
 # getting tweets from twitter user using getoldtweets3
-def get_tweets(username):
+def get_tweets(username, max_tweets):
     import GetOldTweets3 as got
     tweetCriteria = got.manager.TweetCriteria().setUsername(username) \
         .setSince("2020-01-01") \
         .setUntil("2020-04-01") \
-        .setMaxTweets(10)
+        .setMaxTweets(max_tweets)
     # Creation of list that contains all tweets
     tweets = got.manager.TweetManager.getTweets(tweetCriteria)
     # Creating list of chosen tweet data
@@ -22,16 +22,13 @@ def get_tweets(username):
 
 
 username = input("Enter twitter username(multiple userneame separated by space)")
+max_tweets = int(input("Enter maximum number of tweets to get"))
+
+text_tweets = get_tweets(username, max_tweets)
 
 text = ""
-text_tweets = get_tweets(username)
-length = len(text_tweets)
-print(text_tweets[0])
-
-for i in range(0, length):
+for i in range(0, len(text_tweets)):
     text = text_tweets[i][0] + " " + text
-
-print(text)
 
 # lowercasing and cleaning the input text
 text = text.lower()
@@ -40,12 +37,8 @@ cleaned_text = text.translate(str.maketrans('', '', string.punctuation))
 # tokenizing the text using word_tokenize function
 text_tokenize = word_tokenize(text)
 
-
 # Removing stop words from our text
-final_text = []
-for word in text_tokenize:
-    if word not in stopwords.words('english'):
-        final_text.append(word)
+final_text = [word for word in text_tokenize if word not in stopwords.words('english')]
 
 # NLP emotion algorithm.
 with open('emotion.json', encoding='UTF-8') as file:
