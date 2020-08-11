@@ -5,17 +5,21 @@ import json
 import matplotlib.pyplot as plt
 from collections import Counter
 import GetOldTweets3 as got
+from datetime import datetime
 
 
 # getting tweets from twitter user using getoldtweets3
 def get_tweets(username, max_tweets):
     import GetOldTweets3 as got
+    date = datetime.today().strftime('%Y-%m-%d')
     tweetCriteria = got.manager.TweetCriteria().setUsername(username) \
         .setSince("2020-01-01") \
-        .setUntil("2020-04-01") \
+        .setUntil(date) \
         .setMaxTweets(max_tweets)
+
     # Creation of list that contains all tweets
     tweets = got.manager.TweetManager.getTweets(tweetCriteria)
+    
     # Creating list of chosen tweet data
     tweets = [[tweet.text] for tweet in tweets]
     return tweets
